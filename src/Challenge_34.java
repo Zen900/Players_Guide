@@ -10,7 +10,7 @@ public class Challenge_34 {
         board(randomNumbers);
 
         while (!Arrays.equals(numbers, randomNumbers)){
-            randomNumbers = player(randomNumbers);
+            player(randomNumbers);
             board(randomNumbers);
             System.out.println("Moves: " + moves);
             moves++;
@@ -46,7 +46,7 @@ public class Challenge_34 {
         System.out.println("————————————————");
     }
 
-    public static String[] player (String[] randomNumbers){
+    public static void player (String[] randomNumbers){
         Scanner scanner = new Scanner(System.in);
         int emptySpace = 0;
         int user = -100;
@@ -65,6 +65,5 @@ public class Challenge_34 {
             }
             else System.out.println("This is not possible, please try again");
         }
-        return randomNumbers;
     }
 }
