@@ -1,63 +1,83 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class InventoryItem{
+class InventoryItem38{
     double weight;
     double volume;
-    InventoryItem(double weight, double volume){
+    InventoryItem38(double weight, double volume){
         this.weight = weight;
         this.volume = volume;
     }
 }
-class Arrow37 extends InventoryItem{
-    Arrow37() {
+class Arrow38 extends InventoryItem38{
+    Arrow38() {
         super(0.1,0.05);
     }
+    public String toString(){
+        return "Arrow ";
+    }
 }
 
-class Bow extends InventoryItem{
-    Bow(){
+class Bow38 extends InventoryItem38{
+    Bow38(){
         super(1,4);
     }
+    public String toString(){
+        return "Bow ";
+    }
 }
 
-class Rope extends InventoryItem{
-    Rope(){
+class Rope38 extends InventoryItem38{
+    Rope38(){
         super(1,1.5);
     }
+    public String toString(){
+        return "Rope ";
+    }
 }
 
-class Water extends InventoryItem{
-    Water(){
+class Water38 extends InventoryItem38{
+    Water38(){
         super(2,3);
     }
+    public String toString(){
+        return "Water ";
+    }
 }
 
-class Food extends InventoryItem{
-    Food(){
+class Food38 extends InventoryItem38{
+    Food38(){
         super(1,0.5);
     }
-}
-
-class Sword extends InventoryItem{
-    Sword(){
-        super(5,3);
+    public String toString(){
+        return "Food ";
     }
 }
 
-class Pack{
+class Sword38 extends InventoryItem38{
+    Sword38(){
+        super(5,3);
+    }
+    public String toString(){
+        return "Sword ";
+    }
+}
+
+class Pack38{
     final int maxItems = 20;
     final double maxWeight = 10;
     final double maxVolume = 12;
-    ArrayList<InventoryItem> items = new ArrayList<>();
+    ArrayList<InventoryItem38> items = new ArrayList<>();
     double totalWeight = 0;
     double totalVolume = 0;
-    public boolean add(InventoryItem item){
+    String contentsOfPack = "";
+    public boolean add(InventoryItem38 item){
         items.add(item);
         totalWeight += items.get(items.size()-1).weight;
         totalVolume += items.get(items.size()-1).volume;
         return totalWeight < maxWeight && totalVolume < maxVolume && items.size() < maxItems;
     }
+
     public void state(){
         System.out.println("The current item count is: " + items.size());
         System.out.println("The weight is: " + totalWeight);
@@ -65,19 +85,24 @@ class Pack{
         System.out.println("The limits are: maximum items = " + maxItems + " maximum weight = " +
                 maxWeight + " maximum volume = " + maxVolume);
     }
+
+    public String toString(){
+        System.out.print("Pack containing ");
+        return contentsOfPack;
+    }
 }
 
-public class Challenge_37 {
+public class Challenge_38 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        InventoryItem inventoryItem = new InventoryItem(0,0);
-        Arrow37 arrow37 = new Arrow37();
-        Bow bow = new Bow();
-        Rope rope = new Rope();
-        Water water = new Water();
-        Food food = new Food();
-        Sword sword = new Sword();
-        Pack pack = new Pack();
+        InventoryItem38 inventoryItem = new InventoryItem38(0,0);
+        Arrow38 arrow = new Arrow38();
+        Bow38 bow = new Bow38();
+        Rope38 rope = new Rope38();
+        Water38 water = new Water38();
+        Food38 food = new Food38();
+        Sword38 sword = new Sword38();
+        Pack38 pack = new Pack38();
         int user;
         boolean exceed;
 
@@ -97,7 +122,7 @@ public class Challenge_37 {
                 user = scanner.nextInt();
             }
             inventoryItem = switch (user) {
-                case 1 -> arrow37;
+                case 1 -> arrow;
                 case 2 -> bow;
                 case 3 -> rope;
                 case 4 -> water;
@@ -105,6 +130,16 @@ public class Challenge_37 {
                 case 6 -> sword;
                 default -> inventoryItem;
             };
+            pack.contentsOfPack += switch (user){
+                case 1 -> arrow.toString();
+                case 2 -> bow.toString();
+                case 3 -> rope.toString();
+                case 4 -> water.toString();
+                case 5 -> food.toString();
+                case 6 -> sword.toString();
+                default -> "";
+            };
+
             exceed = pack.add(inventoryItem);
             if (!exceed) {
                 System.out.println("This is not possible, a limit has been reached");
@@ -113,6 +148,7 @@ public class Challenge_37 {
                 pack.items.remove(pack.items.size() - 1);
             }
             pack.state();
+            System.out.println(pack.toString());
         }
     }
 }
