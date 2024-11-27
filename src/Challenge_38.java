@@ -13,6 +13,7 @@ class Arrow38 extends InventoryItem38{
     Arrow38() {
         super(0.1,0.05);
     }
+    @Override
     public String toString(){
         return "Arrow ";
     }
@@ -22,6 +23,7 @@ class Bow38 extends InventoryItem38{
     Bow38(){
         super(1,4);
     }
+    @Override
     public String toString(){
         return "Bow ";
     }
@@ -31,6 +33,7 @@ class Rope38 extends InventoryItem38{
     Rope38(){
         super(1,1.5);
     }
+    @Override
     public String toString(){
         return "Rope ";
     }
@@ -40,6 +43,7 @@ class Water38 extends InventoryItem38{
     Water38(){
         super(2,3);
     }
+    @Override
     public String toString(){
         return "Water ";
     }
@@ -49,6 +53,7 @@ class Food38 extends InventoryItem38{
     Food38(){
         super(1,0.5);
     }
+    @Override
     public String toString(){
         return "Food ";
     }
@@ -58,6 +63,7 @@ class Sword38 extends InventoryItem38{
     Sword38(){
         super(5,3);
     }
+    @Override
     public String toString(){
         return "Sword ";
     }
@@ -70,7 +76,6 @@ class Pack38{
     ArrayList<InventoryItem38> items = new ArrayList<>();
     double totalWeight = 0;
     double totalVolume = 0;
-    String contentsOfPack = "";
     public boolean add(InventoryItem38 item){
         items.add(item);
         totalWeight += items.get(items.size()-1).weight;
@@ -86,9 +91,13 @@ class Pack38{
                 maxWeight + " maximum volume = " + maxVolume);
     }
 
+    @Override
     public String toString(){
-        System.out.print("Pack containing ");
-        return contentsOfPack;
+        StringBuilder contents = new StringBuilder("Pack containing ");
+        for (InventoryItem38 item : items) {
+            contents.append(item.toString());
+        }
+        return contents + "";
     }
 }
 
@@ -130,15 +139,6 @@ public class Challenge_38 {
                 case 6 -> sword;
                 default -> inventoryItem;
             };
-            pack.contentsOfPack += switch (user){
-                case 1 -> arrow.toString();
-                case 2 -> bow.toString();
-                case 3 -> rope.toString();
-                case 4 -> water.toString();
-                case 5 -> food.toString();
-                case 6 -> sword.toString();
-                default -> "";
-            };
 
             exceed = pack.add(inventoryItem);
             if (!exceed) {
@@ -148,7 +148,7 @@ public class Challenge_38 {
                 pack.items.remove(pack.items.size() - 1);
             }
             pack.state();
-            System.out.println(pack.toString());
+            System.out.println(pack);
         }
     }
 }
