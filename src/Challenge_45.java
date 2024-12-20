@@ -12,7 +12,7 @@ public class Challenge_45 {
         grid = new int[gridSize][gridSize];
         while (!(row == 0 && column == 0 && fountainEnabled)){
             System.out.println("You are in the room at (Row=" + row + ", Column=" + column + ")." );
-            informationForUser(row, column, fountainEnabled);
+            informationForUser(row, column, fountainEnabled, grid);
             direction = userInput(row,column, grid, scanner);
             switch (direction) {
                 case "move north":
@@ -27,7 +27,7 @@ public class Challenge_45 {
                 case "move west":
                     column -= 1;
                     break;
-                case "enable fountain": if (row == 0 && column == 2){
+                case "enable fountain": if (row == grid.length -4 && column == grid.length -2){
                     fountainEnabled = true;
                 }
             }
@@ -65,14 +65,14 @@ public class Challenge_45 {
         return user;
     }
 
-    public static void informationForUser(int row, int column, boolean fountainEnabled){
+    public static void informationForUser(int row, int column, boolean fountainEnabled, int grid[][]){
         if (row == 0 && column == 0 && !fountainEnabled){
             System.out.println("You see light coming from the cavern entrance.");
         }
-        if (row == 0 && column == 2 && !fountainEnabled){
+        if (row == grid.length -4 && column == grid.length -2 && !fountainEnabled){
             System.out.println("you hear water dripping in this room. The Fountain of Objects is here!");
         }
-        if (row == 0 && column == 2 && fountainEnabled){
+        if (row == grid.length -4 && column == grid.length -2 && fountainEnabled){
             System.out.println("You hear the rushing waters from the Fountain of Objects. It has been reactivated!");
         }
     }
